@@ -1,0 +1,56 @@
+# =========================
+# Python virtual environments
+# =========================
+venv/
+.venv/
+ENV/
+env/
+
+# =========================
+# Python cache / bytecode
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Pytest / test artifacts
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# SQLite database files
+# =========================
+*.sqlite3
+*.db
+
+# =========================
+# Logs & runtime files
+# =========================
+*.log
+notifications.log
+
+# =========================
+# Selenium screenshots (optional)
+# =========================
+*.png
+
+# =========================
+# IDE / Editor files
+# =========================
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment variables
+# =========================
+.env
