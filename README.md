@@ -102,4 +102,4 @@ Logging
 
 Automated integration testing using pytest + requests
 
-It’s a simple but complete example of microservice integration workflows.
+It’s a simple but complete example of microservice integration workflows.# integration-ci
