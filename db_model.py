@@ -1,34 +1,50 @@
-# db_model.py
 import sqlite3
-from pathlib import Path
+import pathlib
 
-DB_FILE = Path(__file__).parent / "app.db"
+# SQLite DB file
+DB_FILE = pathlib.Path("todos.db")
+
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
-    c = conn.cursor()
-    c.execute("""
+    cursor = conn.cursor()
+
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS todos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL
-        );
+        )
     """)
+
     conn.commit()
     conn.close()
 
-def add_todo(title: str):
-    conn = sqlite3.connect(DB_FILE)
-    c = conn.cursor()
-    c.execute("INSERT INTO todos (title) VALUES (?)", (title,))
-    conn.commit()
-    last_id = c.lastrowid
-    conn.close()
-    return last_id
 
-def get_todo(id: int):
+def add_todo(title: str) -> int:
     conn = sqlite3.connect(DB_FILE)
-    c = conn.cursor()
-    c.execute("SELECT id, title FROM todos WHERE id=?", (id,))
-    row = c.fetchone()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO todos (title) VALUES (?)",
+        (title,)
+    )
+
+    todo_id = cursor.lastrowid
+    conn.commit()
     conn.close()
-    return row
+
+    return todo_id
+
+
+def get_all_todos():
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT id, title FROM todos")
+    rows = cursor.fetchall()
+    conn.close()
+
+    return [
+        {"id": row[0], "title": row[1]}
+        for row in rows
+    ]
